@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            
+            {% if request.args.get('id') == session['id'].__str__() %}
+                <h4>Mi Perfil</h4>
+            {% else %}
+                <h4>Editar Usuario</h4>
+            {% endif %}
+
+            <a class="btn btn-danger" href="/usuarios/eliminar?id={{request.args.get('id')}}" type="button">Eliminar Cuenta</a>
+
+        </div>
+        <div class="card-body">
+            <form action="/usuarios/editar/?id={{request.args.get('id')}}" method="POST" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">*Cédula:</label>
+                    <div class="input-group">
+                        <span class="input-group-text">C.I:</span>
+                        <input type="text" name="user_cedula" class="form-control" value="{{usuario[1] or usuario.cedula}}" required>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">*Nombre completo:</label>
+                    <input type="text" name="user_nombre" class="form-control" value="{{usuario[2] or usuario.nombre}}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">*Correo:</label>
+                    <input type="email" name="user_correo" class="form-control" value="{{usuario[3] or usuario.correo}}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">*Teléfono:</label>
+                    <input type="number" name="user_telefono" class="form-control" value="{{usuario[6] or usuario.telefono}}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">*Clave:</label>
+                    <input type="password" name="user_clave" class="form-control" value="{{usuario[4] or usuario.clave}}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">*Confirmar Clave:</label>
+                    <input type="password" name="user_conf_clave" class="form-control" value="{{usuario[4] or usuario.clave}}" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">*Ciudad:</label>
+                    <input type="text" name="user_ciudad" class="form-control" value="{{usuario[8] or usuario.ciudad}}" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">*Tipo:</label>
+                    <select class="form-select" name="user_tipo" id="user_tipo" required >
+                        <option selected disabled value="">SELECCIONA...</option>
+                        <option value="CLIENTE">CLIENTE</option>
+                        {% if session['tipo'] and session['tipo'] == "ADMINISTRADOR" %}
+                            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                        {% endif %}
+                    </select>
+
+                    <script>
+
+                        var select = document.getElementById("user_tipo")
+                        
+                        select.value = "{{usuario[7] or usuario.tipo}}"
+
+                    </script>
+
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">*Dirección</label>
+                    <textarea type="text" name="user_direccion" class="form-control" required>{{usuario[5] or usuario.direccion}}</textarea>
+                </div>
+
+                <div class="col-md-12">
+
+                    <button class="btn btn-success" type="submit">Guardar Cambios</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

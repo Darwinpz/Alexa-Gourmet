@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Registro de Platos o Productos</h4>
+
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+
+                <form action="/crearproducto" method="POST" class="row g-3" enctype="multipart/form-data">
+
+                    <div class="col col-sm-12 col-md-12 col-lg-4 mb-2 col-12">
+
+
+                        <img src="/static/products/default.png"
+                            class="img-fluid border border-secondary"  style="max-height: 269px;height: 269px; width: 410px; max-width: 410px;" id="imagePreview" />
+
+                        <div class="input-group mt-2">
+
+                            <input style="display: none;" type="file" name="file" class="custom-file-input" id="subir_img"
+                                accept="image/*" onchange="loadImage(event)">
+
+                            <label class="custom-file-label" for="subir_img"><a
+                                    class="btn btn-success border-dark">Subir Imagen <i
+                                        class="fas fa-image"></i></a></label>
+                        </div>
+
+                        <script>
+                            var loadImage = function (event) {
+
+                                var output = document.getElementById('imagePreview');
+
+                                output.src = URL.createObjectURL(event.target.files[0]);
+
+                            };
+                        </script>
+
+                    </div>
+
+                    <div class="col col-sm-12 col-md-12 col-lg-8 mb-2 col-12">
+                        <div class="card border border-secondary">
+
+                            <div class="card-body">
+
+                                <div class="row g-3">
+
+                                    <div class="col-md-5">
+                                        <label class="form-label">*Nombre del Plato:</label>
+                                        <input type="text" name="prod_nombre" class="form-control"
+                                            value="{{producto.nombre}}" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label">*Precio:</label>
+                                        <input type="number" name="prod_precio" class="form-control"
+                                            value="{{producto.precio or 1}}" required min="1">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label">*Stock:</label>
+                                        <input type="number" name="prod_stock" class="form-control"
+                                            value="{{producto.stock or 1}}" required min="1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">*Categoria:</label>
+                                        <select class="form-select" name="prod_categoria" id="prod_categoria" required>
+                                            <option selected disabled value="">SELECCIONA...</option>
+                                            {% for categoria in categorias %}
+                                            <option value="{{categoria[0]}}">{{categoria[1]}}</option>
+                                            {% endfor %}
+                                        </select>
+
+                                        <script>
+
+                                            var select = document.getElementById("prod_categoria")
+
+                                            select.value = "{{producto.categoria}}"
+
+                                        </script>
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label">Descripción:</label>
+                                        <textarea type="text" name="prod_descripcion" class="form-control"
+                                            required>{{producto.descripcion}}</textarea>
+                                    </div>
+
+                                    <div class="col-md-12">
+
+                                        <button class="btn btn-success" type="submit">Crear producto</button>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

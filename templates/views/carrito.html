@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Carrito de compras</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive " style="margin-top: auto;">
+                <table id="table_carrito" width="100%" cellspacing="0" class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody>
+
+                        {% for carrito in carritos %}
+                        <tr>
+                            <td><img src="/static/products/{{carrito[1]}}"
+                                    style="height: 50px; width: 100px; max-height: 50px; max-width: 100px;"></td>
+                            <td>{{carrito[2]}}</td>
+                            <td>{{carrito[3]}}</td>
+                            <td>x {{carrito[4]}}</td>
+                            <td>{{carrito[3] * carrito[4]}}</td>
+                            <td><a type="button" href="/carrito/eliminar/?id={{carrito[0]}}" class="btn btn-danger"><i
+                                        class="fas fa-trash"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div class="card-footer">
+
+            <div class="row">
+                <div class="col">
+
+                    {% if total[0] %}
+                    <h4>Total de compra: $ {{total[0]}}</h4>
+                    {% else %}
+                    <h4>Total de compra: $ 0</h4>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col">
+
+                    {% if total[0] %}
+
+                    <form action="/addfacturas" method="POST">
+
+
+                        <select class="form-select mb-2" name="fact_forma_pago" id="fact_forma_pago" required>
+                            <option selected disabled value="">SELECCIONA...</option>
+                            <option value="EFECTIVO">EFECTIVO</option>
+                        </select>
+
+                        <input type="number" name="fact_valor_pagado" class="form-control"
+                            placeholder="Valor a pagar" required>
+
+                        <input type="number" style="display: none;" name="fact_subtotal" class="form-control"
+                            value="{{total[0]-(total[0]*0.12)}}" required>
+
+                        <input type="text" style="display: none;" name="fact_total" class="form-control"
+                            value="{{total[0]}}" required>
+
+                        <input type="text" style="display: none;" name="fact_car_cod_compra" class="form-control"
+                            value="{{cod_compra}}" required>
+
+                        <button class="btn btn-success mt-3" type="submit">Crear Pedido</button>
+                        
+                        
+                    </form>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table_carrito').DataTable({
+            "pagingType": "full_numbers", //con esto salen los botones de primero anterior siguiente ultimo y los numeros de pagina
+            "pageLength": 5, //para que se filtren por 5
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" //Para que salga en español
+            },
+            "lengthMenu": [5, 10, 15]
+        });
+    });
+</script>
+
+{% endblock %}

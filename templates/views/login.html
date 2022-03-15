@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="row align-items-center">
+
+
+    <div class="col col-sm-12 col-md-12 col-lg-6 mb-2 col-12">
+
+
+        <div class="card" style="background-color: transparent; border: none;">
+
+            <img src="{{ url_for('static', filename= 'img/plato1.jpg') }}" class="img-fluid" />
+
+        </div>
+
+
+    </div>
+
+    <div class="col col-sm-12 col-md-12 col-lg-6 col-12">
+        
+
+        <div class="card border-dark">
+
+            <div class="card-header border-dark">
+
+                <h5>Inicio de Sesión</h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="container p-2">
+                    <form action="/login" method="POST">
+
+                        <div class="form-group mb-3">
+                            <input placeholder="Correo" class="form-control border-primary" name="user_correo" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input type="password" placeholder="Clave" class="form-control border-primary"
+                                name="user_clave" />
+                        </div>
+
+                        <button class="btn btn-block btn-primary border-dark">Ingresar al Website</button>
+                        <span> ó </span>
+                        <a class="btn btn-outline-secondary" href="/usuarios/registrar" type="button">Registrarse</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

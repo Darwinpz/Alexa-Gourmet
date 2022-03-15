@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            
+            <h4>{{ producto[1]}}</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <div class="col col-sm-12 col-md-12 col-lg-6 mb-2 col-12">
+
+                    <div class="card border border-secondary" style="background-color: transparent;">
+
+                        <img src="/static/products/{{producto[8]}}" style="height: 400px; max-height: 400px; width: 600px; max-width: 600px;" class="img-fluid" />
+            
+                    </div>
+
+                </div>
+
+                <div class="col col-sm-12 col-md-12 col-lg-6 col-12">
+
+                    <div class="card border border-primary" >
+
+                        <div class="card-body"  >
+
+                            <h2 style="color: green;" class="mb-3">$ {{producto[3]}}</h2>
+
+                            <h5 class="mb-3">Stock: <span style="color: royalblue;">{{producto[7]}}</span></h5>
+
+                            <span><i class="fas fa-eye mb-3"></i> {{producto[4]}}</span>
+                            <span><i class="fas fa-heart mb-3" style="color: red;"></i> {{producto[5]}}</span>
+                            
+                            <h5>Descripción: </h5>
+
+                            <div class="card-body border border-secondary" >
+                                
+                                <p>{{producto[2]}}</p>
+
+                            </div>
+                            
+
+                        </div>
+
+                        <div class="card-footer">
+                            
+                            <form action="/addcarrito" method="POST" class="row g-3">
+                                
+                                <div class="container d-flex align-items-center">
+
+                                    <div class="col-md-3 mx-2">
+
+                                        <input type="number" name="car_cantidad" class="form-control" value="1" required min="1">
+                                        <input style="display: none;" type="number" name="car_producto" class="form-control"
+                                            value="{{producto[0]}}" required>
+                                    </div>
+
+                                    <button class="btn btn-primary" href="" role="button"><i class="fas fa-cart-plus"> Añadir al Carrito</i></button>
+            
+                                </div>
+
+                            </form>
+                            
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock %}

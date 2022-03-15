@@ -1,0 +1,63 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top p-1 navbar-static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Alexa Gourmet: {{session['tipo']}}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto flex-row flex justify-content-around">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/platos"><i class="fas fa-utensils"></i> Platos</a>
+                </li>
+
+                {% if session['correo'] %}
+                
+                <li class="nav-item">
+                    <a class="nav-link active" href="/carrito"><i class="fas fa-cart-plus"></i> Carrito</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/facturas"><i class="fas fa-file-alt"></i> Facturas</a>
+                </li>
+                
+                {% if session['tipo'] and session['tipo'] == "ADMINISTRADOR" %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/usuarios"><i class="fas fa-users"></i> Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/categorias"><i class="fas fa-layer-group"></i> Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/productos"><i class="fas fa-box-open"></i> Productos</a>
+                    </li>
+
+                {% elif session['tipo'] and session['tipo'] == "CLIENTE"  %}
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/usuarios/editar/?id={{session['id']}}"><i class="fas fa-users"></i> Perfil</a>
+                    </li>
+                
+                {% endif %}
+                
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/salir"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="/ingresar"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+
+    </div>
+</nav>

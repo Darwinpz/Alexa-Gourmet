@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Añadir Categorías</h4>
+
+        </div>
+        <div class="card-body">
+            <form action="/crearcategoria" method="POST" class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label">*Nombre:</label>
+                    <input type="text" name="cat_nombre" class="form-control" value="{{categoria.nombre}}" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Descripcion</label>
+                    <textarea type="text" name="cat_descripcion" class="form-control" required>{{categoria.descripcion}}</textarea>
+                </div>
+
+                <div class="col-md-12">
+
+                    <button class="btn btn-success" type="submit">Crear Categoria</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

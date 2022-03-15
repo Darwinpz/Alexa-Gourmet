@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+
+            <h4>Editar Categoria</h4>
+
+            <a class="btn btn-danger" href="/categorias/eliminar?id={{request.args.get('id')}}" type="button">Eliminar Categoria</a>
+
+        </div>
+        <div class="card-body">
+            <form action="/categorias/editar/?id={{request.args.get('id')}}" method="POST" class="row g-3">
+                <div class="col-md-5">
+                    <label class="form-label">*Nombre:</label>
+                    <input type="text" name="cat_nombre" class="form-control" value="{{categoria[1] or categoria.nombre}}" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Descripcion</label>
+                    <textarea type="text" name="cat_descripcion" class="form-control" required>{{categoria[2] or categoria.descripcion}}</textarea>
+                </div>
+
+                <div class="col-md-12">
+
+                    <button class="btn btn-success" type="submit">Guardar Cambios</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

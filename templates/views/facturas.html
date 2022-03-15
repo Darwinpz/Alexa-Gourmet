@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h4>Facturas</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive " style="margin-top: auto;">
+                <table id="table_facturas" width="100%" cellspacing="0" class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th scope="col">N°</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Forma de pago</th>
+                            <th scope="col">Valor pagado</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                    </tfoot>
+                    <tbody>
+
+                        {% for factura in facturas %}
+                        <tr>
+                            <td>{{factura[0]}}</td>
+                            <td>{{factura[1]}}</td>
+                            <td>{{factura[2]}}</td>
+                            <td>{{factura[3]}}</td>
+                            <td>{{factura[4]}}</td>
+                            <td>{{factura[5]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#table_facturas').DataTable({
+            "pagingType": "full_numbers", //con esto salen los botones de primero anterior siguiente ultimo y los numeros de pagina
+            "pageLength": 5, //para que se filtren por 5
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" //Para que salga en español
+            },
+            "lengthMenu": [5, 10, 15]
+        });
+    });
+</script>
+
+{% endblock %}
